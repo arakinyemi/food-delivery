@@ -7,7 +7,9 @@ import Header from "./Header"
 export default function CommonLayout({children}) {
     return <CartState>
         <Header />
-        {children}
+        <div className="px-[30px] md:px-[50px] lg:px-[100px] py-10">
+            {children}
+        </div>
         <Footer />
     </CartState>
 }
