@@ -13,7 +13,7 @@ import {
 
 export default function Cart() {
     return (
-      <div>
+      <div className="px-[30px] md:px-[50px] lg:px-[100px] py-10">
         <BreadcrumbComp title="Cart" />
         <Table className="mt-4">
           <TableHeader>
