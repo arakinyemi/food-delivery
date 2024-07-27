@@ -1,12 +1,15 @@
 import React from "react"
 import { Card, CardContent } from "@/components/ui/card"
+import Link from "next/link";
 
-export default function Category(){
+export default function Category({category}){
     return(
-        <Card className="h-43 md:h-50 lg:h-50 aspect-square flex justify-center items-center rounded-xl border-black">
-          <CardContent >
-            <p className="text-center text-2xl font-semibold">Fruits</p>
-          </CardContent>
-        </Card>
+        <Link href="/category/1">
+          <Card className="flex justify-center items-center rounded-xl shadow-lg w-[200px] h-[200px]">
+            <CardContent>
+              <p className="text-center text-2xl font-semibold">{category}</p>
+            </CardContent>
+          </Card>
+        </Link>
     );
 }
