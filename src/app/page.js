@@ -2,6 +2,7 @@ import React from "react";
 import CardItem from "./components/CardItem";
 import Category from "./components/Category";
 import { fetchLimitCategories, fetchLimitProducts } from "@/lib/utils";
+import Link from "next/link";
 export default async function Home() {
   const products = await fetchLimitProducts(); 
   const categories = await fetchLimitCategories(); 
@@ -43,7 +44,7 @@ export default async function Home() {
         }
     </div>
     <div className="flex justify-center items-center">
-    <a href="/products" className="text-center text-base lg:text-l font-semibold p-6">View All Products</a>
+    <Link href="/products" className="text-center text-base lg:text-l font-semibold p-6">View All Products</Link>
     </div>
     </div>
     </>
