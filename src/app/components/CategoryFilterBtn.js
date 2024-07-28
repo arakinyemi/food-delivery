@@ -1,7 +1,3 @@
-"use client"
-
-import * as React from "react"
-
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -13,10 +9,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { fetchCategories, fetchLimitCategories } from "@/lib/utils";
+import Link from "next/link";
 
-export default function CategoryFilterBtn() {
-  const [position, setPosition] = React.useState("bottom")
-
+export default async function CategoryFilterBtn() {
+  const categories = await fetchCategories();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -25,10 +22,15 @@ export default function CategoryFilterBtn() {
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Categories</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-          <DropdownMenuRadioItem value="top">Fruits</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="bottom">Dessert</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="right">Appetizer</DropdownMenuRadioItem>
+        <DropdownMenuRadioGroup value="bottom">
+          {
+            categories && categories.length > 0 ?
+              categories.map((category) => (
+                <Link href={`/category/${category.slug}`}><DropdownMenuRadioItem>{category.name}</DropdownMenuRadioItem></Link>
+              )) : 
+              null
+          }
+          
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
