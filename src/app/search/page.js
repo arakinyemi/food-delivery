@@ -15,8 +15,8 @@ export default function Search({searchParams}) {
           }
         }
         fetchProducts();
-      }, [searchParams])
-      console.log(products);
+      }, [searchParams.q])
+      console.log(searchParams);
   return (
     <>
       <div className="px-[30px] md:px-[50px] lg:px-[100px] py-10"> 
