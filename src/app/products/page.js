@@ -1,18 +1,37 @@
-import { Button } from "@/components/ui/button";
-import { RiArrowDropDownLine } from "react-icons/ri";
+"use client"
 import CardItem from "../components/CardItem";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination"
 import CategoryFilterBtn from "../components/CategoryFilterBtn";
+import { Pagination } from "antd";
 
-export default function Products() {
+import { useEffect, useState } from "react";
+
+export default function Products({searchParams}) {
+  const per_page = 8
+  const [page, setPage] = useState(1);
+  const [products, setProducts] = useState([]);
+  const [total, setTotal] = useState(0);
+  let start = (Number(page)-1) * Number(per_page)
+
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await fetch(`https://dummyjson.com/products?limit=8&skip=${start}`);
+        const result = await response.json();
+        setProducts(result);
+        setTotal(result.total)
+      } catch(error) {
+        console.log(error);
+      }
+    }
+    fetchProducts();
+  }, [page])
+  console.log(products);
+
+  function onChange(page) {
+    setPage(page);
+    start = (Number(page)-1) * Number(per_page);
+  }
+
   return (
     <>
       <div className="px-[30px] md:px-[50px] lg:px-[100px] py-10"> 
@@ -23,33 +42,17 @@ export default function Products() {
       </div>
       <div className="bg-[#f7f7f7] h-full px-[30px] md:px-[50px] lg:px-[100px] py-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5 mb-3">
-          <CardItem/>
-          <CardItem/>
-          <CardItem/>
-          <CardItem/>
-          <CardItem/>
-          <CardItem/>
-          <CardItem/>
-          <CardItem/>
+        {
+          products && products?.products?.length > 0 ?
+            products?.products?.map((product)  => (
+              <CardItem  product={product} />
+            ))
+          : null
+        }
       </div>
-      <div>
-        <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious href="#" />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">1</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">2</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationNext href="#" />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
-      </div>
+      <div className="flex justify-center">
+            <Pagination align="center" defaultCurrent={1} total={total} onChange={onChange} showSizeChanger={false} />
+        </div>
       </div>
     </>
   );

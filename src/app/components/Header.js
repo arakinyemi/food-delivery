@@ -1,10 +1,12 @@
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { CiShoppingCart, CiMenuBurger } from "react-icons/ci";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 export default function Header() {
   const [showSearch, setShowSearch] = useState(false);
+  const {cartItems} = useContext(CartContext);
     return (
       <div className="flex justify-between items-center bg-white shadow-md px-[30px] md:px-[50px] lg:px-[100px] py-6">
         <div className="flex justify-between items-center gap-4">
@@ -24,7 +26,7 @@ export default function Header() {
           <Link href="/products">All Products</Link>
           <Link href="/cart" className="relative">
             <CiShoppingCart className="text-3xl sm:text-4xl" />
-            <span className="bg-black text-white rounded-full flex justify-center items-center w-[20px] h-[20px] text-[10px] absolute right-[-5px] top-[-3px]">2</span>
+            <span className="bg-black text-white rounded-full flex justify-center items-center w-[20px] h-[20px] text-[10px] absolute right-[-5px] top-[-3px]">{cartItems.length}</span>
           </Link>
         </div>
       </div>
