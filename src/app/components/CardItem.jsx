@@ -16,7 +16,7 @@ export default function CardItem(){
         <Card className="rounded-lg shadow-lg">
             <CardContent>
                 <div className="w-full">
-                    <Image src="/place.jpg" width={200} height={200} className="w-full rounded-t-lg"/>
+                    <Image src="/Buritto.jpeg" width={200} height={200} className="w-full rounded-t-lg"/>
                 </div>
             </CardContent>
             <CardFooter className="mt-3 shadow-inner">
