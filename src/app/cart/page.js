@@ -28,13 +28,13 @@ export default function Cart() {
           <TableBody>
             <TableRow className="text-[18px]">
               <TableCell>
-                <img src="/place.jpg" className="w-full" />
+                <img src="/Buritto.jpeg" className="w-full rounded-[8px] shadow-black shadow-md" />
               </TableCell>
               <TableCell>Borito</TableCell>
               <TableCell>Dessert</TableCell>
               <TableCell className="font-bold text-xl">₦ 1,550.00</TableCell>
               <TableCell className="text-right">
-                <Button>Remove From Cart</Button>
+                <Button className="p-2 items-center hover:bg-green-500">Remove From Cart</Button>
               </TableCell>
             </TableRow>
           </TableBody>
